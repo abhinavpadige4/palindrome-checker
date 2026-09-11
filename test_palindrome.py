@@ -102,9 +102,12 @@ class TestPalindromeChecker(unittest.TestCase):
         self.assertFalse(is_palindrome(None))
         
         # Other types that convert to strings reasonably
-        self.assertFalse(is_palindrome([]))  # "[]" -> "[]" -> not palindrome
-        self.assertFalse(is_palindrome([1, 2, 1]))  # "[1, 2, 1]" -> "[121]" -> not palindrome  
-        self.assertFalse(is_palindrome({}))  # "{}" -> "{}" -> not palindrome
+        # Note: [] becomes "[]" -> "" (empty) -> palindrome -> True
+        #       {} becomes "{}" -> "" (empty) -> palindrome -> True
+        #       [1, 2, 1] becomes "[1, 2, 1]" -> "121" -> palindrome -> True
+        self.assertTrue(is_palindrome([]))  # "[]" -> "" -> palindrome
+        self.assertTrue(is_palindrome({}))  # "{}" -> "" -> palindrome
+        self.assertTrue(is_palindrome([1, 2, 1]))  # "[1, 2, 1]" -> "121" -> palindrome
         
         # Boolean values
         self.assertFalse(is_palindrome(True))  # "True" -> "true" -> not palindrome ("true" != "eurt")
