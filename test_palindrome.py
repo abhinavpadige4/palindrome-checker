@@ -69,9 +69,7 @@ class TestPalindromeChecker(unittest.TestCase):
         self.assertFalse(is_palindrome("python"))
         # "Race car" with space ignored becomes "racecar" which IS a palindrome
         self.assertTrue(is_palindrome("Race car"))  # Actually IS a palindrome when ignoring space
-        # But "Racecar" with different casing is still palindrome
-        self.assertFalse(is_palindrome("Racecar"))  # This is still palindrome - let me fix this
-        # Let me use a real non-palindrome
+        # Use a real non-palindrome
         self.assertFalse(is_palindrome("Race cars"))  # "racecars" != "secracear"
         self.assertFalse(is_palindrome("A man, a plan, a canal: Panama!"))  # Extra exclamation makes it not palindrome
         
