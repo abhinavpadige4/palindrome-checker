@@ -1,45 +1,37 @@
 # Palindrome Checker
 
-A comprehensive Python module for checking if strings are palindromes, with multiple implementations and extensive unit tests.
+A simple Python function to check if a string or integer is a palindrome.
 
 ## Features
 
-- **Multiple Implementations**: 
-  - Simple slicing approach (`is_palindrome`)
-  - Two-pointer technique (`is_palindrome_two_pointer`) 
-  - Recursive approach (`is_palindrome_recursive`)
-- **Flexible Options**:
-  - Case sensitivity control
-  - Alphanumeric filtering control
-- **Robust Error Handling**: Type checking for input validation
-- **Comprehensive Tests**: Full test suite covering edge cases, unicode, and performance
-- **Well Documented**: Clear docstrings with examples
+- Handles both string and integer inputs
+- Case-insensitive for string inputs
+- Ignores non-alphanumeric characters in strings
+- Works with Unicode characters
+- Comprehensive unit test suite
 
 ## Installation
 
-No installation required - just copy the `palindrome_checker.py` file into your project.
+No installation required beyond Python 3.8+. The module uses only built-in functions.
 
 ## Usage
 
 ```python
-from palindrome_checker import is_palindrome, is_palindrome_two_pointer, is_palindrome_recursive
+from palindrome import is_palindrome
 
-# Basic usage
+# String palindromes
 print(is_palindrome("racecar"))  # True
-print(is_palindrome("hello"))    # False
-
-# With punctuation and spaces
 print(is_palindrome("A man, a plan, a canal: Panama"))  # True
+print(is_palindrome("hello"))  # False
 
-# Case sensitive
-print(is_palindrome("Racecar", ignore_case=False))  # False
+# Integer palindromes
+print(is_palindrome(12321))  # True
+print(is_palindrome(12345))  # False
 
-# Keeping non-alphanumeric characters
-print(is_palindrome("A man, a plan, a canal: Panama", ignore_non_alphanumeric=False))  # False
-
-# Using different implementations
-print(is_palindrome_two_pointer("racecar"))  # True
-print(is_palindrome_recursive("racecar"))    # True
+# Edge cases
+print(is_palindrome(""))  # True (empty string)
+print(is_palindrome("a"))  # True (single character)
+print(is_palindrome("!!!"))  # True (only non-alphanumeric)
 ```
 
 ## Running Tests
@@ -47,45 +39,47 @@ print(is_palindrome_recursive("racecar"))    # True
 To run the unit tests:
 
 ```bash
-python test_palindrome_checker.py
+# Using unittest (built-in)
+python -m unittest test_palindrome.py
+
+# Or run the test file directly
+python test_palindrome.py
 ```
 
-Or using unittest discovery:
+## Function Specification
 
-```bash
-python -m unittest test_palindrome_checker.py -v
-```
+### `is_palindrome(input_value) -> bool`
 
-## Algorithm Details
+**Parameters:**
+- `input_value`: Any value that can be converted to string (str, int, float, etc.)
 
-### Simple Slicing Approach
-- **Time Complexity**: O(n)
-- **Space Complexity**: O(n) for the cleaned string and its reverse
-- **Best for**: Most use cases, readable and concise
+**Returns:**
+- `True` if the input is a palindrome, `False` otherwise
 
-### Two-Pointer Technique
-- **Time Complexity**: O(n)
-- **Space Complexity**: O(1) auxiliary (excluding input)
-- **Best for**: Memory-constrained environments or very long strings
+**Behavior:**
+1. Converts input to string using `str()`
+2. Filters to keep only alphanumeric characters (`isalnum()`)
+3. Converts to lowercase for case-insensitive comparison
+4. Checks if the cleaned string equals its reverse
 
-### Recursive Approach
-- **Time Complexity**: O(n)
-- **Space Complexity**: O(n) due to recursion stack
-- **Best for**: Educational purposes or when recursion is preferred
+**Examples:**
+- `is_palindrome("A man, a plan, a canal: Panama")` → `True`
+- `is_palindrome(12321)` → `True`
+- `is_palindrome("hello")` → `False`
+- `is_palindrome("")` → `True`
+- `is_palindrome(None)` → `False`
 
 ## Test Coverage
 
 The test suite includes:
-- Basic palindromes and non-palindromes
-- Empty strings and single characters
-- Strings with punctuation, spaces, and special characters
-- Numeric palindromes
-- Unicode and emoji support
+- Basic string palindromes
 - Case sensitivity tests
-- Error handling for invalid inputs
-- Performance tests with long strings
-- All three implementation variants
+- Punctuation and whitespace handling
+- Integer palindromes
+- Edge cases (empty string, single char, etc.)
+- Invalid input handling
+- Unicode character support
 
 ## License
 
-MIT License - feel free to use and modify as needed.
+MIT
